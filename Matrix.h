@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <stdexcept>
 #include <chrono>
 
 using namespace std;
@@ -19,8 +20,8 @@ public:
 
 	void Random(int, int);
 
-	Matrix operator=(const Matrix);
-	Matrix operator+(const Matrix);
+	Matrix operator=(const Matrix&);
+	Matrix operator+(const Matrix&);
 
 	friend ostream& operator<<(ostream&, Matrix&);
 	friend istream& operator>>(istream&, Matrix&);
