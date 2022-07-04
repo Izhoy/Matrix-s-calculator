@@ -19,11 +19,14 @@ public:
 	~Matrix();
 
 	void Random(int, int);
+	Matrix Transpotion();
 
 	Matrix operator=(const Matrix&);
 	Matrix operator+(const Matrix&);
+	Matrix operator-(const Matrix&);
+	Matrix operator*(const Matrix&);
 
-	friend ostream& operator<<(ostream&, Matrix&);
-	friend istream& operator>>(istream&, Matrix&);
+	friend ostream& operator<<(ostream&, Matrix);
+	friend istream& operator>>(istream&, Matrix);
 };
 

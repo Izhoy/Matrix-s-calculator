@@ -2,19 +2,28 @@
 
 int main() {
 	try {
-		Matrix A(2, 3), B(2, 3);
+		Matrix A(3, 3), B(3, 3);
 
-		A.Random(10, 100);
-		B.Random(10, 100);
+		A.Random(0, 9);
+		B.Random(0, 9);
 
-		cout << A << endl << B << endl;
+		cout << "Matrix A:" << endl << A << endl;
+		cout << "Matrix B:" << endl << B << endl;
 
-		Matrix C(2, 3);
-		C = A + B;
-		cout << C << endl;
+		cout << "A + B:" << endl;
+		cout << A + B << endl;
+
+		cout << "A - B:" << endl;
+		cout << A - B << endl;
+
+		cout << "A * B:" << endl;
+		cout << A * B << endl;
+
+		cout << "Transponation A:" << endl;
+		cout << A.Transpotion() << endl;
 	}
 	catch (exception& err) {
-		cout << "Exception:" << err.what() << endl;
+		cout << "Exception: " << err.what() << endl;
 	}
 	return EXIT_SUCCESS;
 }
