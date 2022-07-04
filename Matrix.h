@@ -19,7 +19,8 @@ public:
 	~Matrix();
 
 	void Random(int, int);
-	Matrix Transpotion();
+	Matrix Transposition();
+	int Determinant();
 
 	Matrix operator=(const Matrix&);
 	Matrix operator+(const Matrix&);

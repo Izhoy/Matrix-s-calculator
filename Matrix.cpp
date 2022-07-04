@@ -77,7 +77,7 @@ void Matrix::Random(int min, int max) {
 	}
 }
 
-Matrix Matrix::Transpotion(){
+Matrix Matrix::Transposition(){
 	Matrix T(Ydimension, Xdimension);
 
 	for (int i = 0; i < Xdimension; ++i) {
@@ -86,6 +86,11 @@ Matrix Matrix::Transpotion(){
 		}
 	}
 	return T;
+}
+
+int Matrix::Determinant()
+{
+	return 0;
 }
 
 Matrix Matrix::operator=(const Matrix &A) {

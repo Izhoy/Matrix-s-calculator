@@ -19,8 +19,8 @@ int main() {
 		cout << "A * B:" << endl;
 		cout << A * B << endl;
 
-		cout << "Transponation A:" << endl;
-		cout << A.Transpotion() << endl;
+		cout << "Transposition A:" << endl;
+		cout << A.Transposition() << endl;
 	}
 	catch (exception& err) {
 		cout << "Exception: " << err.what() << endl;
