@@ -10,20 +10,20 @@ using namespace std::chrono;
 class Matrix
 {
 private:
-	int StringCount;  // Количество строк
-	int ColumnCount; // Количество столбцов
-	int **element;  // Указатель на элемент матрицы
+	int StringCount;  // Number of strings
+	int ColumnCount; // Number of columns
+	int **element;  // Pointer of element
 public:
 	Matrix(int StringCount = 1, int ColumnCount = 1);
 	Matrix(const Matrix&);
 	~Matrix();
 
-	void Random(int, int);  // Функция заполнения матрицы случайными числами
-	Matrix& Transposition(); // Транспонирование матрицы
-	Matrix& Minor(unsigned int, unsigned int);  // Выделение минора
-	int Determinant(); // Подсчёт определителя
+	void Random(int, int);  // Method that fill matrix with random numbers
+	Matrix& Transposition(); // Transposition of matrix
+	Matrix& Minor(unsigned int, unsigned int);  // Removal one string and one column from matrix
+	int Determinant(); // Determinant of matrix
 
-	//Перегрузка операторов
+	// Operator`s overloads
 	Matrix& operator=(const Matrix&);
 	Matrix& operator+(const Matrix&);
 	Matrix& operator-(const Matrix&);
