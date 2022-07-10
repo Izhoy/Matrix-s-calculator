@@ -2,36 +2,36 @@
 
 int main() {
 	try {
-		Matrix A(3, 3), B(3, 3);  //Создаём 2 матрицы размером 3 на 3
+		Matrix A(3, 3), B(3, 3);  //Create matrices (size 3 by 3)
 
-		A.Random(0, 9); //Заполняем их случайными числами от 0 до 9
+		A.Random(0, 9); //Fill with random numbers from 0 to 9
 		B.Random(0, 9);
 
-		//Выводим их в консоль
+		//Show matrix A and Matrix B
 		cout << "Matrix A:" << endl << A << endl;
 		cout << "Matrix B:" << endl << B << endl;
 
-		//Складываем
+		//Sum of A and B
 		cout << "A + B:" << endl;
 		cout << A + B << endl;
 
-		//Вычитаем
+		//Substraction A and B
 		cout << "A - B:" << endl;
 		cout << A - B << endl;
 
-		//Умножаем
+		//Production A and B
 		cout << "A * B:" << endl;
 		cout << A * B << endl;
 
-		//Транспонируем
+		//Transposition of A
 		cout << "Transposition A:" << endl;
-		cout << A.Transposition() << endl;  // Транспонирование матрицы А
+		cout << A.Transposition() << endl;
 
-		//Выводим на экран
+		//Determinant of A
 		cout << "Determinant" << endl;
-		cout << A.Determinant() << endl; // Определитель матрицы А
+		cout << A.Determinant() << endl;
 	}
-	catch (exception& err) { // Вывод исключений
+	catch (exception& err) { // Show exceptions
 		cout << "Exception: " << err.what() << endl;
 	}
 	return EXIT_SUCCESS;
