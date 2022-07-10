@@ -1,12 +1,12 @@
 #include "Matrix.h"
 
-const char *err_arguments = "Matrix dimension must be greater thanы zero (Matrix Constructor)";
+const char *err_arguments = "Matrix dimension must be greater thanГ» zero (Matrix Constructor)";
 const char *err_dimension = "Dimensions are different ('+', '-' or '*' overload)";
 const char *err_memory = "Not enough memory";
 const char *err_square_matrix = "Matrix is not square (Determinant function)";
 const char *err_invalid_arguments = "Input atguments are not acceptable (Minor funstion)";
 
-// Конструктор (по умолчанию аргументы равны 1)
+// Constructor (arguments are equal to 1 by default)
 Matrix::Matrix(int StringCount, int ColumnCount) {
 	if (StringCount <= 0 || ColumnCount <= 0) {
 		throw(invalid_argument(err_arguments));
@@ -25,7 +25,7 @@ Matrix::Matrix(int StringCount, int ColumnCount) {
 		cout << err.what() << endl;
 		throw invalid_argument(err_memory);
 	}
-	// Созданную матрицу заполняем нулями
+	// The created matrix are equal to zero
 	for (int i = 0; i < this->StringCount; ++i) {
 		for (int j = 0; j < this->ColumnCount; ++j) {
 			element[i][j] = 0;
@@ -33,7 +33,7 @@ Matrix::Matrix(int StringCount, int ColumnCount) {
 	}
 }
 
-// Конструктор копирования
+// Copy Constructor
 Matrix::Matrix(const Matrix& A) {
 
 	StringCount = A.StringCount;
@@ -58,7 +58,7 @@ Matrix::Matrix(const Matrix& A) {
 	
 }
 
-// Деструктор
+// Destructor
 Matrix::~Matrix() {
 	if (element != nullptr) {
 		for (int i = 0; i < this->StringCount; ++i) {
@@ -69,11 +69,11 @@ Matrix::~Matrix() {
 	}
 }
 
-// Метод заполнения матрицы случайными числами
+// This method fill matrix with random numbers
 void Matrix::Random(int min, int max) {
-	/* Код "srand(time(0);"
-	не позволял генерировать две разные матрицы за один запуск программы,
-	поэтому вместо аргумента функции srand подставил время расчитанное в микросекундах*/
+	/* The function srand(time(0) dont allow to create two different
+	Matrices in one launch
+	So I use time in microseconds to do it*/
 
 	system_clock::time_point now = system_clock::now();
 	chrono::nanoseconds d = now.time_since_epoch();
@@ -87,7 +87,7 @@ void Matrix::Random(int min, int max) {
 	}
 }
 
-// Метод транспонирования матрицы
+// Transposition of matrix
 Matrix& Matrix::Transposition(){
 	Matrix *T = new Matrix(ColumnCount, StringCount);
 
@@ -99,7 +99,7 @@ Matrix& Matrix::Transposition(){
 	return *T;
 }
 
-// Метод выделения минора (необходим для подсчёта определителя)
+// Removal one string and one column from matrix (necessary in Determinant())
 Matrix& Matrix::Minor(unsigned int x, unsigned int y)
 {
 	if (x == 0 || y == 0 || x > (unsigned int)StringCount || y > (unsigned int)ColumnCount) 
@@ -110,10 +110,10 @@ Matrix& Matrix::Minor(unsigned int x, unsigned int y)
 	int i = 0, j = 0, n = 0, m = 0;
 
 	while (i < StringCount || n < M->StringCount) {
-		if (i == x - 1) ++i;  // Если натыкаемся на строку, которую необходимо вырезать, то пропускаем её
+		if (i == x - 1) ++i;  // Skip the line that needs to be removed
 		if (i == StringCount) break;
 		while (j < ColumnCount || m < M->ColumnCount) {
-			if (j == y - 1) ++j; // Если натыкаемся на столбец, который необходимо вырезать, то пропускаем его
+			if (j == y - 1) ++j; // Skip the column that needs to be removed
 			M->element[n][m] = element[i][j];
 			++j; ++m;
 		}
@@ -124,7 +124,7 @@ Matrix& Matrix::Minor(unsigned int x, unsigned int y)
 	return *M;
 }
 
-// Метод подсчёта определителя
+// Determinant of matrix
 int Matrix::Determinant()
 {
 	if (StringCount != ColumnCount) throw(invalid_argument(err_square_matrix));
@@ -143,7 +143,7 @@ int Matrix::Determinant()
 	return Det;
 }
 
-// Перегрузка оператора присваивания
+// overload of operator "="
 Matrix& Matrix::operator=(const Matrix &A) {
 	if (element != nullptr) {
 		for (int i = 0; i < this->StringCount; ++i) {
@@ -175,7 +175,7 @@ Matrix& Matrix::operator=(const Matrix &A) {
 	return *this;
 }
 
-// Перегрузка оператора сложения
+// overload of operator "+"
 Matrix& Matrix::operator+(const Matrix &A){
 
 	if (StringCount != A.StringCount || ColumnCount != A.ColumnCount) {
@@ -193,7 +193,7 @@ Matrix& Matrix::operator+(const Matrix &A){
 	return *Sum;
 }
 
-// Перегрузка оператора вычитания
+// overload of operator "-"
 Matrix& Matrix::operator-(const Matrix &A){
 	if (StringCount != A.StringCount || ColumnCount != A.ColumnCount) {
 		throw invalid_argument(err_dimension);
@@ -210,7 +210,7 @@ Matrix& Matrix::operator-(const Matrix &A){
 	return *Sub;
 }
 
-// Перегрузка оператора умножения
+// overload of operator "+"
 Matrix& Matrix::operator*(const Matrix &A){
 	if (StringCount != A.ColumnCount || ColumnCount != A.StringCount) {
 		throw invalid_argument(err_dimension);
@@ -229,7 +229,7 @@ Matrix& Matrix::operator*(const Matrix &A){
 	return *Product;
 }
 
-// Перегрузка оператора выходного потока
+// overload of operator "<<"
 ostream& operator<<(ostream& out, Matrix &A) {
 	for (int i = 0; i < A.StringCount; ++i) {
 		for (int j = 0; j < A.ColumnCount; ++j) {
@@ -241,7 +241,7 @@ ostream& operator<<(ostream& out, Matrix &A) {
 	return out;
 }
 
-// Перегрузка оператора входного потока
+// overload of operator ">>"
 istream& operator>>(istream& in, Matrix &A) {
 	for (int i = 0; i < A.StringCount; ++i) {
 		for (int j = 0; j < A.ColumnCount; ++j) {
