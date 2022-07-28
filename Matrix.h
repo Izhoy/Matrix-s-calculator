@@ -19,45 +19,45 @@ template <typename T = int>
 class Matrix
 {
 private:
-	size_t RowCount;  // Количество строк
-	size_t ColumnCount; // Количество столбцов
-	T **matrix;  // Указатель на элемент матрицы
+	size_t RowCount;  // Number of rows
+	size_t ColumnCount; // Number of columns
+	T **matrix;  // Pointer to element of matrix
 
 public:
-	Matrix(size_t RowCount = 1, size_t ColumnCount = 1);  // Конструктор
-	Matrix(const Matrix&); // Конструктор копирования
-	Matrix(Matrix&&);  // Конструктор перемещения
-	~Matrix();  // Деструктор
+	Matrix(size_t RowCount = 1, size_t ColumnCount = 1);  // Constructor
+	Matrix(const Matrix&); // Copy constructor
+	Matrix(Matrix&&);  // Move constructor
+	~Matrix();  // Destructor
 
-	const size_t getRowCount() { return RowCount; }  // Get методы
+	const size_t getRowCount() { return RowCount; }  // Get methods
 	const size_t getColumnCount() { return ColumnCount; }
 
-	void setElement(unsigned int, unsigned int, T);  // Изменение элемента матрицы
+	void setElement(unsigned int, unsigned int, T);  // Changing of element
 
-	void fillRandom(int, int);  // Функция заполнения матрицы случайными числами
-	const Matrix<T> Transposition(); // Транспонирование матрицы
-	Matrix<T> Minor(unsigned int, unsigned int);  // Выделение минора
-	const T Determinant(); // Подсчёт определителя
-	Matrix<double> Inverse(); // Подсчёт обратной матрицы
+	void fillRandom(int, int);  // Filling the matrix with random values
+	const Matrix<T> Transposition(); // Transposition of matrix
+	Matrix<T> Minor(unsigned int, unsigned int);  // Minor of matrix
+	const T Determinant(); // Determinant of matrix
+	Matrix<double> Inverse(); // Calculating inverse matrix
 
-	//Перегрузка операторов
-	Matrix operator=(const Matrix&); // Присваивание
-	Matrix operator=(Matrix&&);  // Присваивание с перемещением
-	Matrix operator+(const Matrix&); // Сложение
-	Matrix operator-(const Matrix&); // Вычитание
-	Matrix operator*(const Matrix&); // Умножение
-	const T &operator()(unsigned int, unsigned int); // Индексация 
+	//overload of operators
+	Matrix operator=(const Matrix&); // Assignment
+	Matrix operator=(Matrix&&);  // Assignment with moving
+	Matrix operator+(const Matrix&); // Addition
+	Matrix operator-(const Matrix&); // Substraction
+	Matrix operator*(const Matrix&); // Multiplication
+	const T &operator()(unsigned int, unsigned int); // Indexing
 
 	template <typename T>
-	friend ostream& operator<<(ostream&, const Matrix<T>&); // Выходной поток
+	friend ostream& operator<<(ostream&, const Matrix<T>&); // Output stream
 	template <typename T>
-	friend istream& operator>>(istream&, const Matrix<T>&); // Входной поток
+	friend istream& operator>>(istream&, const Matrix<T>&); // Input stream
 
-	friend Matrix<double> operator*(const Matrix<double>, const Matrix<int>);  // Специализация для матриц double и int
+	friend Matrix<double> operator*(const Matrix<double>, const Matrix<int>);  // template specialization
 	friend Matrix<double> operator*(const Matrix<int>, const Matrix<double>);
 };
 
-// Конструктор
+// Constructor
 template <typename T>
 Matrix<T>::Matrix(size_t RowCount, size_t ColumnCount) {
 	if (RowCount == 0 || ColumnCount == 0) {
@@ -85,7 +85,7 @@ Matrix<T>::Matrix(size_t RowCount, size_t ColumnCount) {
 	}
 }
 
-// Конструктор копирования
+// Copy constructor
 template <typename T>
 Matrix<T>::Matrix(const Matrix& A)
 	:RowCount(A.RowCount), ColumnCount(A.ColumnCount) {
@@ -114,7 +114,7 @@ Matrix<T>::Matrix(const Matrix& A)
 	}
 }
 
-// Конструктор перемещения
+// Move constructor
 template <typename T>
 Matrix<T>::Matrix(Matrix&& A) :
 	RowCount(A.RowCount), ColumnCount(A.ColumnCount), matrix(A.matrix) {
@@ -123,7 +123,7 @@ Matrix<T>::Matrix(Matrix&& A) :
 	A.matrix = nullptr;
 }
 
-// Деструктор
+// Destructor
 template <typename T>
 Matrix<T>::~Matrix() {
 	if (matrix != nullptr) {
@@ -135,7 +135,7 @@ Matrix<T>::~Matrix() {
 	}
 }
 
-// Изменение определённого элемента матрицы
+// Changing of one element
 template<typename T>
 void Matrix<T>::setElement(unsigned int i, unsigned int j, T value){
 	if (i > RowCount || j > ColumnCount)
@@ -144,7 +144,7 @@ void Matrix<T>::setElement(unsigned int i, unsigned int j, T value){
 	matrix[i][j] = value;
 }
 
-//Метод заполнения матрицы случайными числами
+// Filling matrix with random numbers
 template <typename T>
 void Matrix<T>::fillRandom(int min, int max) {
 
@@ -159,7 +159,7 @@ void Matrix<T>::fillRandom(int min, int max) {
 	}
 }
 
-// Метод транспонирования матрицы
+// Transposition of matrix
 template <typename T>
 const Matrix<T> Matrix<T>::Transposition() {
 	Matrix<T> Tran = Matrix(ColumnCount, RowCount);
@@ -172,7 +172,7 @@ const Matrix<T> Matrix<T>::Transposition() {
 	return Tran;
 }
 
-// Метод выделения минора (необходим для подсчёта определителя)
+// Minor of matrix
 template <typename T>
 Matrix<T> Matrix<T>::Minor(unsigned int x, unsigned int y)
 {
@@ -193,7 +193,7 @@ Matrix<T> Matrix<T>::Minor(unsigned int x, unsigned int y)
 	return M;
 }
 
-// Метод подсчёта определителя
+// Calculating determinant of matrix
 template <typename T>
 const T Matrix<T>::Determinant() {
 	if (RowCount != ColumnCount) throw(invalid_argument(err_square_matrix));
@@ -211,7 +211,7 @@ const T Matrix<T>::Determinant() {
 	return Det;
 }
 
-// Метод подсчёта обратной матрицы
+// Calculating inverse matrix
 template<typename T>
 Matrix<double> Matrix<T>::Inverse(){
 	double Det = (double)this->Determinant();
@@ -228,7 +228,7 @@ Matrix<double> Matrix<T>::Inverse(){
 	return Inv.Transposition();
 }
 
-// Перегрузка оператора присваивания
+// Overload of assignment operator
 template <typename T>
 Matrix<T> Matrix<T>::operator=(const Matrix& A) {
 	if (matrix != nullptr) {
@@ -268,7 +268,7 @@ Matrix<T> Matrix<T>::operator=(const Matrix& A) {
 	return *this;
 }
 
-// Перегрузка оператора присваивания с перемещением
+// Overload of assignment operator with moving
 template <typename T>
 Matrix<T> Matrix<T>::operator=(Matrix&& A) {
 	if (matrix != nullptr) {
@@ -290,7 +290,7 @@ Matrix<T> Matrix<T>::operator=(Matrix&& A) {
 	return *this;
 }
 
-// Перегрузка оператора сложения
+// Overload of addition operator
 template <typename T>
 Matrix<T> Matrix<T>::operator+(const Matrix& A) {
 
@@ -309,7 +309,7 @@ Matrix<T> Matrix<T>::operator+(const Matrix& A) {
 	return Sum;
 }
 
-// Перегрузка оператора вычитания
+// Overload of substraction operator
 template <typename T>
 Matrix<T> Matrix<T>::operator-(const Matrix& A) {
 	if (RowCount != A.RowCount || ColumnCount != A.ColumnCount) {
@@ -327,7 +327,7 @@ Matrix<T> Matrix<T>::operator-(const Matrix& A) {
 	return Sub;
 }
 
-// Перегрузка оператора умножения
+// Overload of multiplication operator
 template <typename T>
 Matrix<T> Matrix<T>::operator*(const Matrix& A) {
 	if (RowCount != A.ColumnCount || ColumnCount != A.RowCount) {
@@ -348,7 +348,7 @@ Matrix<T> Matrix<T>::operator*(const Matrix& A) {
 	return Product;
 }
 
-// Перегрузка индексации
+// Overload of indexing
 template <typename T>
 const T& Matrix<T>::operator()(unsigned int Row, unsigned int Column) {
 	if (Row == 0 || Column == 0 || Row > RowCount || Column > ColumnCount)
@@ -357,7 +357,7 @@ const T& Matrix<T>::operator()(unsigned int Row, unsigned int Column) {
 	return matrix[Row - 1][Column - 1];
 }
 
-// Перегрузка оператора выходного потока
+// Overload of output stream
 template <typename T>
 ostream& operator<<(ostream& out, const Matrix<T>& A) {
 	out.setf(std::ios::fixed);
@@ -372,7 +372,7 @@ ostream& operator<<(ostream& out, const Matrix<T>& A) {
 	return out;
 }
 
-// Перегрузка оператора входного потока
+// Overload of input stream
 template <typename T>
 istream& operator>>(istream& in, const Matrix<T>& A) {
 	for (size_t i = 0; i < A.RowCount; ++i) {
@@ -384,7 +384,7 @@ istream& operator>>(istream& in, const Matrix<T>& A) {
 	return in;
 }
 
-// Перегрузка оператора умножения с явной специализацией
+// Template specialization for multiplication Matrix<double> and Matrix<int>
 Matrix<double> operator*(Matrix<double> Left, Matrix<int> Right) {
 	if (Left.RowCount != Right.ColumnCount || Left.ColumnCount != Right.RowCount) {
 		throw invalid_argument(err_dimension);
@@ -404,6 +404,7 @@ Matrix<double> operator*(Matrix<double> Left, Matrix<int> Right) {
 	return Product;
 }
 
+// Template specialization for multiplication Matrix<int> and Matrix<double>
 Matrix<double> operator*(Matrix<int> Left, Matrix<double> Right) {
 	if (Left.RowCount != Right.ColumnCount || Left.ColumnCount != Right.RowCount) {
 		throw invalid_argument(err_dimension);
