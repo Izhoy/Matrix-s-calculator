@@ -2,45 +2,45 @@
 
 int main() {
 	try {
-		Matrix A(3, 3), B(3, 3);  //Создаём 2 целочисленные матрицы размером 3 на 3
+		Matrix A(3, 3), B(3, 3);  // Creating two integer matrices 3 by 3
 
-		A.fillRandom(0, 9); //Заполняем их случайными числами от 0 до 9
+		A.fillRandom(0, 9); // Fill in with random numbers from 0 to 9
 		B.fillRandom(0, 9);
 
-		//Выводим их в консоль
+		// Output of matrices to the console
 		cout << "Matrix A:" << endl << A << endl;
 		cout << "Matrix B:" << endl << B << endl;
 
-		//Складываем
+		//Sum
 		cout << "A + B:" << endl;
 		cout << A + B << endl;
 
-		//Вычитаем
+		//Substraction
 		cout << "A - B:" << endl;
 		cout << A - B << endl;
 		
-		//Умножаем
+		//Production
 		cout << "A * B:" << endl;
 		cout << A * B << endl;
 
-		//Транспонируем
+		//Transpotion of matrix A
 		cout << "Transposition A:" << endl;
 		cout << A.Transposition() << endl;
 
-		//Вычисляем определитель
+		//Calculating the determinant
 		cout << "Determinant of A:" << endl;
 		cout << A.Determinant() << endl; 
 
-		//Вычисляем обратную матрицу
+		//Calculating the inverse matrix
 		cout << "1/A :" << endl;
 		cout << A.Inverse() << endl;
 
-		//Проверка обратной матрицы
+		//Checking of inverse matrix
 		cout << "A * 1/A :" << endl;
 		cout << A * A.Inverse() << endl;
 
 	}
-	catch (exception& err) { // Вывод исключений
+	catch (exception& err) { //Exception handling
 		cout << "Exception: " << err.what() << endl;
 		return EXIT_FAILURE;
 	}
