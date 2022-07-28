@@ -2,37 +2,48 @@
 
 int main() {
 	try {
-		Matrix A(3, 3), B(3, 3);  //Create matrices (size 3 by 3)
+		Matrix A(3, 3), B(3, 3);  //Создаём 2 целочисленные матрицы размером 3 на 3
 
-		A.Random(0, 9); //Fill with random numbers from 0 to 9
-		B.Random(0, 9);
+		A.fillRandom(0, 9); //Заполняем их случайными числами от 0 до 9
+		B.fillRandom(0, 9);
 
-		//Show matrix A and Matrix B
+		//Выводим их в консоль
 		cout << "Matrix A:" << endl << A << endl;
 		cout << "Matrix B:" << endl << B << endl;
 
-		//Sum of A and B
+		//Складываем
 		cout << "A + B:" << endl;
 		cout << A + B << endl;
 
-		//Substraction A and B
+		//Вычитаем
 		cout << "A - B:" << endl;
 		cout << A - B << endl;
-
-		//Production A and B
+		
+		//Умножаем
 		cout << "A * B:" << endl;
 		cout << A * B << endl;
 
-		//Transposition of A
+		//Транспонируем
 		cout << "Transposition A:" << endl;
 		cout << A.Transposition() << endl;
 
-		//Determinant of A
-		cout << "Determinant" << endl;
-		cout << A.Determinant() << endl;
+		//Вычисляем определитель
+		cout << "Determinant of A:" << endl;
+		cout << A.Determinant() << endl; 
+
+		//Вычисляем обратную матрицу
+		cout << "1/A :" << endl;
+		cout << A.Inverse() << endl;
+
+		//Проверка обратной матрицы
+		cout << "A * 1/A :" << endl;
+		cout << A * A.Inverse() << endl;
+
 	}
-	catch (exception& err) { // Show exceptions
+	catch (exception& err) { // Вывод исключений
 		cout << "Exception: " << err.what() << endl;
+		return EXIT_FAILURE;
 	}
+
 	return EXIT_SUCCESS;
 }
